@@ -1,2 +1,5 @@
-# noodle game
- made for a game jam
+# How to install
+
+# How to play
+
+
