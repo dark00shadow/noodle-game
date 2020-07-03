@@ -4,7 +4,8 @@ from pyglet.gl import *
 from RectangleCollision import *
 
 StartMenu = True
-
+Mousex = 0
+MouseY = 0
 # Window
 
 WINDOW = pyglet.window.Window(caption='noodle-game', width=600, height=600)
@@ -22,12 +23,24 @@ glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 # Start menu
 
 class Start():
-    Button_Image = pyglet.image.load('StartButton.png')
-
+    ButtonImage = pyglet.image.load('StartButton.png')
+    ButtonTriggerOnce = False
+# Other
+@WINDOW.event
+def on_mouse_motion(x,y,dx,dy):
+    global Mousex, MouseY
+    Mousex = x
+    MouseY = y
 @WINDOW.event
 def on_draw():
     WINDOW.clear()
-    if StartMenu == True: Start.Button_Image.blit(230,250)
+    if StartMenu == True: Start.ButtonImage.blit(230,250)
 def update1(dt):
-    pass
+    global StartMenu
+    if collision.rectangle(Mousex,MouseY, 230,250, 1,1, 150,100) and StartMenu == True:
+        if MouseHandler[mouse.LEFT] and Start.ButtonTriggerOnce == False:
+            Start.ButtonTriggerOnce = True
+            StartMenu = False
+        if not MouseHandler[mouse.LEFT] and Start.ButtonTriggerOnce == True: Start.ButtonTriggerOnce = False
+pyglet.clock.schedule_interval(update1, 1/120)
 pyglet.app.run()
