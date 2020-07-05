@@ -13,7 +13,6 @@ label = pyglet.text.Label('points:' + str(Point), x=5,y=550,color=(0,128,0,255))
 # Window
 
 WINDOW = pyglet.window.Window(caption='noodle-game', width=600, height=600)
-WINDOW.set_fullscreen(True)
 WINDOW.set_location(WINDOW.screen.width//2-WINDOW.width//2, WINDOW.screen.height//2-WINDOW.height//2)
 WINDOW.set_icon(pyglet.image.load('ramen.png'))
 
